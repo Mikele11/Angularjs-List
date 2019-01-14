@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title></title>
+	<script src="https://code.angularjs.org/1.6.9/angular.js"></script>
+	<!-- Latest compiled and minified CSS -->
+  <!-- Optional theme -->
+	<link href="style/styles.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"> 
+</head>
+<body>
+	<div class="container" ng-controller="AppCtrl">
+		<div class="leftPanel">
+			<div class="radioLine">
+				<input type="radio" name="mytag" ng-value='""' id="search" ng-model="tag">
+				<input class="searchInput" type="text" placeholder="   Search" ng-model="searchText.title"/>
+			</div>
+
+			<div class="radioLine"> 
+				<input type="radio" id="all"
+				name="mytag" ng-value='""'
+				ng-model="tag">
+				<label for="contactChoice1">All</label>
+			</div>
+
+			<div class="radioLine" ng-repeat="x in myRadio | orderBy:'model'">
+					<input type="radio"
+					name="mytag"
+					ng-model="$parent.tag"
+					value="{{x.model}}">
+					<label for="contactChoice1">{{x.model}}</label>	
+			</div>
+
+		</div>
+		<div class="rightPanel">
+			<div class="leftList">
+				<div class="repaat" ng-repeat="contact in col1 | filter:searchText| filter:tag | orderBy:'title'">
+					<li class="sdkTitle">
+						{{contact.title}}
+					</li>
+					<div class="sdkTags">
+						{{contact.tags}}
+					</div>
+				</div>
+			</div>
+			<div class="rightList">
+				<div class="repaat" ng-repeat="contact in col2 | filter:searchText| filter:tag | orderBy:'title'">
+					<li class="sdkTitle">
+						{{contact.title}}
+					</li>
+					<div class="sdkTags">
+						{{contact.tags}}
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+<script src="controllers/controller.js"></script>
+</body>
+</html>
